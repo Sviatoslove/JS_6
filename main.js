@@ -8,25 +8,24 @@
 
 */
 
-var num = prompt('Введите многозначное число', 55639217);
+// var num = prompt('Введите многозначное число', 55639217);
 
-function delimiter(num){
-  if(isNaN(num) || num < 0) {
-    alert('Введённые данные не корректны! Пожалуйста, обновите страницу и попробуйте ещё раз.');
-  } else {
-    var str = num.toString();
-    var result = str[0];
-    for(var i=1; i<str.length; i++) {
-      if((str[i-1]%2 !== 0)&&(str[i]%2 !== 0)) {
-        result += ':' + str[i];
-      } else {
-        result += str[i];
-      };
-    }
-  }
-  return result;  
-}
-console.log(delimiter(num));
+// function delimiter(num){
+//   if(isNaN(num) || num < 0) {
+//     alert('Введённые данные не корректны! Пожалуйста, обновите страницу и попробуйте ещё раз.');
+//   } else {
+//     var result = num[0];
+//     for(var i=1; i<num.length; i++) {
+//       if((num[i-1]%2 !== 0)&&(num[i]%2 !== 0)) {
+//         result += ':' + num[i];
+//       } else {
+//         result += num[i];
+//       };
+//     }
+//   }
+//   return result;  
+// }
+// console.log(delimiter(num));
 
 
 /* 
@@ -43,27 +42,42 @@ console.log(delimiter(num));
 var text = 'как долго идут часы, но быстро годы пролетают';
 
 function wordUpperCase(str) {
-  var textUpper = [];
+  var upper = '';
   var arrText = str.split(' ');
-  for(var i = 0; i < arrText.length; i++) {
-    arrText.toString(arrText[i]);
-    var strWord = arrText[i];
-    function strWordUpper(str){
-      var wordUpper = '';
-      for(var i = 0; i < str.length; i++) {
-        if(i == 0) {
-          wordUpper += str[i].toUpperCase();
-        } else {
-          wordUpper += str[i].toLowerCase();
-        };
-      };
-      return textUpper.push(wordUpper);
-    };
-    strWordUpper(strWord);
-  };
-  return textUpper.join(' ');
+  arrText.forEach(function(item){
+    upper += item[0].toUpperCase();
+    upper += item.slice(1) + ' ';
+  })
+  return upper;
 };
+
 var result = wordUpperCase(text);
+// console.log(result);
+
+//                                Решение на память 
+//  8 строчек против 20)))
+
+// function wordUpperCase(str) {
+//   var textUpper = [];
+//   var arrText = str.split(' ');
+//   for(var i = 0; i < arrText.length; i++) {
+//     var strWord = arrText[i];
+//     function strWordUpper(str){
+//       var wordUpper = '';
+//       for(var i = 0; i < str.length; i++) {
+//         if(i == 0) {
+//           wordUpper += str[i].toUpperCase();
+//         } else {
+//           wordUpper += str[i].toLowerCase();
+//         };
+//       };
+//       return textUpper.push(wordUpper);
+//     };
+//     strWordUpper(strWord);
+//   };
+//   return textUpper.join(' ');
+// };
+// var result = wordUpperCase(text);
 // console.log(result);
 
 
@@ -103,19 +117,16 @@ var result = badWordCut(text);
 
 var text = 'извлекает часть строки и возвращает новую строку. Принимает два значения: начало и конец части строки которую необходимо';
 
-function CutStr(str) {
+function CutStr(str, length) {
   var cutText = '';
-  for(var i = 0; i < 50; i++){
-    if(i + 1 === 50) {
-      cutText = str.slice(0, i + 1);
-      var arrCutPoint = cutText.split('');
-      arrCutPoint.splice(i - 2,3,'.','.','.');
-    } else {};
+  for(var i = 0; i < length; i++){
+    cutText = str.slice(0, length - 3) + '...';
   };
-  return arrCutPoint.join('');
+  return cutText;
 };
-var result = CutStr(text);
+var result = CutStr(text, 50);
 // console.log(result);
+
 
 
 /* 
@@ -255,26 +266,23 @@ var numbers2 = [37, 23, 43, 34, 55];
 
 function sumNumbers(arr1, arr2) {
   var numbers3 = [];
+  function sum(arrBig, arrSmall) {
+    numbers3 = arrBig.map(function(num, idx) {
+      if(arrSmall[idx] >= 0) {
+        return num + arrSmall[idx];
+      } else { 
+        return num;
+      };
+    });
+  }
   if(arr2.length > arr1.length){
-    numbers3 = arr2.map(function(num, idx) {
-      if(arr1[idx] >= 0) {
-        return num + arr1[idx];
-      } else { 
-        return num;
-      };
-    });
+    sum(arr2, arr1);
   } else {
-    numbers3 = arr1.map(function(num, idx) {
-      if(arr2[idx] >= 0) {
-        return num + arr2[idx];
-      } else { 
-        return num;
-      };
-    });
+    sum(arr1, arr2);
   };
   return numbers3;  
 };
-var result = sumNumbers(numbers1, numbers2);
+var result = sumNumbers(numbers2, numbers1);
 // console.log(result);
 
 
