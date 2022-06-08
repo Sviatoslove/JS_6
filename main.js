@@ -45,7 +45,7 @@ function wordUpperCase(str) {
   var upper = '';
   var arrText = str.split(' ');
   arrText.forEach(function(item){
-    upper += item[0].toUpperCase();
+    upper = item[0].toUpperCase();
     upper += item.slice(1) + ' ';
   })
   return upper;
@@ -119,9 +119,7 @@ var text = 'извлекает часть строки и возвращает �
 
 function CutStr(str, length) {
   var cutText = '';
-  for(var i = 0; i < length; i++){
-    cutText = str.slice(0, length - 3) + '...';
-  };
+  cutText = str.slice(0, length - 3) + '...';
   return cutText;
 };
 var result = CutStr(text, 50);
